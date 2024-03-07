@@ -12,7 +12,10 @@ urlpatterns = [
     path('remove/<int:pk>', remove, name="remove"),
     path('account/',account,name='account'),
     path('checkout/',checkout,name='checkout'),
+    path('user/',user,name='user'),
     
+    path('registerpage/',registerpage,name='registerpage'),
+    path('loginpage/',loginpage,name='loginpage'),
     path('register/',register,name='register'),
     path('login/',login,name='login'),
     path('logout/',logout,name='logout'),

@@ -68,6 +68,17 @@ p{
     border-radius: 30px;
     transition: background 0.5s;
 }
+.reg{
+    display: inline-block;
+    background: #1d9284;
+    color: white;
+    padding: 8px 30px;
+    border-radius: 30px;
+    transition: background 0.5s;
+}
+.reg:hover{
+    background: #563434;
+}
 .btn:hover{
     background: #563434;
 }

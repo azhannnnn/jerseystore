@@ -7,6 +7,11 @@ def home(request):
     data = Products.objects.all()
     return render(request,'index.html',{'data':data})
 
+def user(request):
+    data = Products.objects.all()
+    return render(request,'user.html',{'data':data})
+
+
 def products(request):
     data = Products.objects.all()
     page = request.GET.get('page', 1)
@@ -29,7 +34,16 @@ def productdetail(request,pk):
     return render(request,'productdetail.html',{'data':data,'data1':data1})
 
 def account(request):
-    return render(request,'account.html')
+    name = request.session['name']
+    email = request.session['email']
+    user = {
+        'username':name,
+        'email':email
+    }
+    return render(request,'account.html',user)
+
+def registerpage(request):
+    return render(request,'register.html')
 
 
 def register(request):
@@ -38,11 +52,13 @@ def register(request):
         email=request.POST.get('remail')
         password=request.POST.get('rpassword')
         cpassword=request.POST.get('rcpassword')
+        print(name,email,password)
         user = Register.objects.filter(Email=email)
 
         if user:
+            print("1")
             message = "User already exist"
-            return render(request, "account.html", {"regmsg": message})
+            return render(request, "login.html", {"regmsg": message})
         else:
             if password == cpassword:
                 Register.objects.create(
@@ -51,10 +67,13 @@ def register(request):
                     Password=password,
                 )
                 message = "User register Successfully"
-                return render(request, "account.html", {"regmsg": message})
+                return render(request, "login.html", {"regmsg": message})
             else:
                 message = "Password and Confirm Password Does not Match"
-                return render(request, "account.html", {"regmsg": message})
+                return render(request, "register.html", {"regmsg": message})
+            
+def loginpage(request):
+    return render(request,'login.html')            
             
 
 def login(request):
@@ -82,13 +101,14 @@ def login(request):
                 # data = Products.objects.filter(Type="tshirt")
                 # data1 = Products.objects.filter(Type="shoes")
                 # data2 = Products.objects.filter(Type="glasses")
-                return render(request,"user.html",{"user":user})
+                data = Products.objects.all()
+                return render(request,"user.html",{"user":user,'data':data})
             else:
                 message = "Password does not match"
-                return render(request,"account.html",{'logmsg':message})
+                return render(request,"login.html",{'logmsg':message})
         else:
             message = "User does not exist"
-            return render(request,"account.html",{'logmsg':message})            
+            return render(request,"register.html",{'logmsg':message})            
         
 def logout(request):
     

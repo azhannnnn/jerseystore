@@ -21,14 +21,14 @@
             </div>
             <nav>
                 <ul id="MenuItems">
-                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'user' %}">Home</a></li>
                     <li><a href="{% url 'products' %}">Products</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Contact</a></li>
                     <li><a href="{% url 'account' %}">Account</a></li>
+                    
                 </ul>
             </nav>
             <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
+            <span class="badge badge-info">{{request.session.card|length}}</span>
             <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
     </div>
@@ -41,31 +41,12 @@
                     <img src="{% static 'images/image1.png' %}" width="100%">
                 </div>
                 <div class="col-2">
-                    <div class="form-container">
-                        <div class="form-btn">
-                            <span onclick="login()">Login</span>
-                            <span onclick="register()">Register</span>
-                            <hr id="Indicator">
-                        </div>
-                        <p>{{logmsg}}</p>
-                        <form id="LoginForm" action="{% url 'login' %}" method="POST">
-
-                            {% csrf_token %}
-                            <input type="text" placeholder="email" name="email">
-                            <input type="password" placeholder="Password" name="password">
-                            <button type="submit" class="btn">Login</button>
-                            <a href="">Forget Password</a>
-                        </form>
-                        <p>{{regmsg}}</p>
-                        <form id="RegForm" action="{% url 'register' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="text" placeholder="Username" name="rname">
-                            <input type="email" placeholder="Email" name="remail">
-                            <input type="password" placeholder="Password" name="rpassword">
-                            <input type="password" placeholder="Confirm Password" name="rcpassword">
-                            <button type="submit" class="btn">Register</button>
-                        </form>
-                    </div>
+                     <div class="form-container">
+                        <h1>Welcome Back!</h1>
+                        <h3>{{username}}</h3>
+                        <h3>{{email}}</h3>
+                        <a class="btn" href="{% url 'logout' %}">Logout</a>
+                    </div> 
                 </div>
             </div>
         </div>
