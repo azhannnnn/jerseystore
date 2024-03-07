@@ -86,15 +86,15 @@
             {% endif %}
             {% endfor %}
         </div>
-
-        <!--Latest Products-->
+        
+     <!--Latest Products-->
 
         <h2 class="title">Latest Products</h2>
         <div class="row">
             {% for i in data reversed %}
             {% if forloop.counter >= 1 and forloop.counter <= 8  %}
             <div class="col-4">
-                <a href="{% url 'productdetail' pk=i.id %}"><img src="{{i.image.url}}"><a href="{% url 'productdetail' pk=i.id %}">
+                <a href="{% url 'productdetail' pk=i.id %}"><img src="{{i.image.url}}"></a>
                 <h4>{{i.Name}}</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
@@ -109,6 +109,7 @@
             {% endfor %}
         </div>  
     </div>
+ 
 
     <!-- Offer -->
     <div class="offer">

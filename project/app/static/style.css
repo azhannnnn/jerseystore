@@ -377,6 +377,7 @@ td img{
     color: white;
     padding: 8px 30px;
     margin: 30px 0;
+    /* border-radius: 30px; */
     margin-right: -2px;
     margin-left: 46vw;
     padding-right: 12vw;
@@ -521,3 +522,4 @@ form a{
         display: none;
     }
 }
+
