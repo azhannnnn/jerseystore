@@ -228,7 +228,7 @@ def payment(request):
         order_id = response_payment['id']
         
         if order_status=='created':
-            product = Payment(Name=name , Amount =amount , Payment_id = response_payment['id'])
+            product = Payment(Name=name , Amount =amount , Payment_id = response_payment['id'] )
             product.save()
             response_payment['name'] = name
         
@@ -253,11 +253,14 @@ def success(request):
 
         try:
             status = client.utility.verify_payment_signature(params_dict)
-            item = Payment.objects.get(order_id=response['razorpay_order_id'])
-            item.razorpay_payment_id = response['razorpay_payment_id']
-            item.paid = True
+            item = Payment.objects.get(Payment_id=response['razorpay_order_id'])
+            item.Payment_id = response['razorpay_payment_id']
+            item.Paid = True
             item.save()
             print("save all data in model")
+            card = request.session['card']
+            card.clear()
+            request.session['card'] = card
             return render(request, 'success.html', {'status': True})
         except:
             print("Not save all data in model")
