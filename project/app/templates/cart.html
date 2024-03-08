@@ -17,12 +17,13 @@
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="logo" width="125px"></a>
+                <img src="{% static 'images/logo.png' %}" alt="logo" width="135px">
             </div>
             <nav>
                 <ul id="MenuItems">
                     <li><a href="{% url 'user' %}">Home</a></li>
                     <li><a href="{% url 'products' %}">Products</a></li>
+                    <li><a href="{% url 'products' %}">Your Orders</a></li>
                     <li><a href="{% url 'account' %}">Account</a></li>
                     
                 </ul>
@@ -32,7 +33,34 @@
             <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
     </div>
-
+    
+    {% if msg %}
+    
+    <center><h1>{{msg}}</h1></center>
+    <div class="small-container cart-page">
+    <div class="small-container">
+        <div class="row">
+            {% for i in data %}
+            {% if forloop.counter <= 4  %}
+            <div class="col-4">
+                <a href="{% url 'productdetail' pk=i.id %}"> <img src="{{i.image.url}}"></a>
+                <h4>{{i.Name}}</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>${{i.Price}}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+            
+        </div>
+    </div>
+    </div>
+    {% else %}
     <!-- Cart items details -->
     <div class="small-container cart-page">
         <table>
@@ -79,6 +107,7 @@
         <br>
         <a href="{% url 'checkout' %}" class="checkout">Checkout</a>
     </div>
+    {% endif %}
 
     <!-- Footer -->
     <div class="footer">

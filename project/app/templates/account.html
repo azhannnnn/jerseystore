@@ -14,17 +14,44 @@
 </head>
 
 <body>
+    <!-- Account Page if user not logged in -->
+    {% if msg %}
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="logo" width="125px"></a>
+                <img src="{% static 'images/logo.png' %}" alt="logo" width="135px">
+            </div>
+        </div>
+    </div>    
+    <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="{% static 'images/image1.png' %}" width="100%">
+                </div>
+                <div class="col-2">
+                     <div class="form-container">
+                        <h1>{{msg}}</h1>
+                        <a class="btn" href="{% url 'loginpage' %}">Login</a>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Page if user logged in -->
+    {% else %}
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="logo" width="125px">
             </div>
             <nav>
                 <ul id="MenuItems">
                     <li><a href="{% url 'user' %}">Home</a></li>
                     <li><a href="{% url 'products' %}">Products</a></li>
+                    <li><a href="{% url 'products' %}">Your Orders</a></li>
                     <li><a href="{% url 'account' %}">Account</a></li>
-                    
                 </ul>
             </nav>
             <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
@@ -33,7 +60,6 @@
         </div>
     </div>
 
-    <!-- Account Page -->
     <div class="account-page">
         <div class="container">
             <div class="row">
@@ -51,7 +77,7 @@
             </div>
         </div>
     </div>
-
+    {% endif %}
 
     <!-- Footer -->
     <div class="footer">

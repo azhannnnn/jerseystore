@@ -13,3 +13,9 @@ class Products(models.Model):
     Price = models.DecimalField(max_digits=5, decimal_places=2)
     Description = models.CharField(max_length=200)
     image = models.ImageField(upload_to="images/", height_field=None,width_field=None,max_length=100)
+
+class Payment(models.Model):
+    Name = models.CharField(max_length=20)
+    Amount = models.CharField(max_length=20)
+    Payment_id = models.CharField(max_length=100)
+    Paid = models.BooleanField(default=False)
