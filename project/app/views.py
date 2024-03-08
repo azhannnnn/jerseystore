@@ -140,6 +140,8 @@ def account(request):
         
 def cart(request):
     try :
+        if request.method == 'POST':
+            client = razorpay.Client(auth=())
         card = request.session['card']
         
         if card == []:
@@ -215,21 +217,49 @@ def checkout(request):
 def payment(request):
     if request.method=="POST":
         name = request.POST.get('name')
+        print(name)
         amount = float(request.POST.get('amount')) * 100
-        
-        
-        client = razorpay.Client(auth=("rzp_test_AcIEh6rX45zRp8","alxj2MIEOtVrhPpGGbMyFvmX"))
-        create_payment = client.order.create({'amount':amount, 'currency':'INR','payment_capture':'1' })
-        payment = Payment(Name=name, Amount=amount, Payment_id=create_payment['id'])
-        payment.save()
-        print(create_payment)
-        
-        return render(request,'checkout.html',{'payment':create_payment})
+        print(amount)
+        client = razorpay.Client(auth=("rzp_test_ank5gb82ed6Jfx","jPpRlGXIaMvgyrlcb1gXuEoV"))
+        response_payment = client.order.create({'amount':amount, 'currency':'INR','payment_capture':'1' })
     
+        print(response_payment)
+        order_status = response_payment['status']
+        order_id = response_payment['id']
+        
+        if order_status=='created':
+            product = Payment(Name=name , Amount =amount , Payment_id = response_payment['id'])
+            product.save()
+            response_payment['name'] = name
+        
+            return render(request,'payment.html',{'payment':response_payment})
+    
+
 
 @csrf_exempt
 def success(request):
-    if request.method=="POST":
-        a = request.POST
-        print(a)
-        return render(request,'success.html')    
+    # print(request.POST)
+    if request.method=='POST':
+        response = request.POST
+        # print(response)
+        params_dict = {
+            'razorpay_order_id': response['razorpay_order_id'],
+            'razorpay_payment_id': response['razorpay_payment_id'],
+            'razorpay_signature': response['razorpay_signature']
+        }
+
+        # client instance
+        client = razorpay.Client(auth=("rzp_test_ank5gb82ed6Jfx","jPpRlGXIaMvgyrlcb1gXuEoV"))
+
+        try:
+            status = client.utility.verify_payment_signature(params_dict)
+            item = Payment.objects.get(order_id=response['razorpay_order_id'])
+            item.razorpay_payment_id = response['razorpay_payment_id']
+            item.paid = True
+            item.save()
+            print("save all data in model")
+            return render(request, 'success.html', {'status': True})
+        except:
+            print("Not save all data in model")
+            return render(request, 'success.html', {'status': False})
+    return render(request, 'success.html')   

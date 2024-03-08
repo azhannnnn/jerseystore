@@ -106,6 +106,7 @@
         </div>
         <br>
         <a href="{% url 'checkout' %}" class="checkout">Checkout</a>
+        {% comment %} <button id="rzp-button1" class="checkout">Pay with Razorpay</button> {% endcomment %}
     </div>
     {% endif %}
 
@@ -164,7 +165,9 @@
             }
         }
     </script>
+   
 
+    
 </body>
 
 </html>

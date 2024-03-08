@@ -23,8 +23,7 @@ TEMPLATE_DIR=BASE_DIR /".templates"
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-6oui9jl+-&w31dgw=50jjnp#a@g9m1mpo*ie5@-@$&4!udj)lr'
 
-KEY = 'rzp_test_AcIEh6rX45zRp8'
-SECRET = 'alxj2MIEOtVrhPpGGbMyFvmX'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -129,3 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = BASE_DIR/"media"
 MEDIA_URL ="/media/"
+
+
+KEY = 'rzp_test_AcIEh6rX45zRp8'
+SECRET = 'alxj2MIEOtVrhPpGGbMyFvmX'
