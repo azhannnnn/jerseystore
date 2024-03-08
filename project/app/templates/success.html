@@ -46,16 +46,10 @@ button:hover {
         <h1>Order Successful</h1>
         <p>Your order has been successfully placed.</p>
         <p>Thank you for shopping with us!</p>
-        <button id="back-to-home">Back to Home</button>
+        <a href="{% url 'cart' %}" id="back-to-home">Back to Home</a>
     </div>
 
-<script>
-    document.getElementById("back-to-home").addEventListener("click", function() {
-    // Redirect to the home page or any other page you want to navigate to.
-    window.location.href = "index.html";
-});
 
-</script>
 
 </body>
 </html>
