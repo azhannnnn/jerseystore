@@ -262,4 +262,5 @@ def success(request):
         except:
             print("Not save all data in model")
             return render(request, 'success.html', {'status': False})
+        
     return render(request, 'success.html')   
