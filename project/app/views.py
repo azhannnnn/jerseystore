@@ -181,7 +181,6 @@ def add_cart(request,pk):
 # Cart Pages -> Remove cart
         
 def remove(request,pk):
-     
      card = request.session['card']
      card.remove(pk)
      request.session['card'] = card
