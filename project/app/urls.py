@@ -22,4 +22,5 @@ urlpatterns = [
 
     path('payment/',payment,name='payment'),
     path('success/',success,name='success'),
+    path('myorder/',myorder,name='myorder'),
 ]

@@ -267,3 +267,11 @@ def success(request):
             return render(request, 'success.html', {'status': False})
         
     return render(request, 'success.html')   
+
+
+
+
+def myorder(request):
+    name = request.session['name']
+    data = Payment.objects.filter(Name=name)
+    return render(request,'myorder.html',{'data':data})
