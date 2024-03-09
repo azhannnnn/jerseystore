@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> {% endcomment %}
+    
 </head>
 
 <body>
@@ -40,10 +40,10 @@
             <h2>All Products</h2>
             <select>
                 <option>Default Sort</option>
-                <option>Sort By Price</option>
-                <option>Sort By Popularity</option>
-                <option>Sort By Rating</option>
-                <option>Sort By Sale</option>
+                <option>Sort T-shirt</option>
+                <option>Sort Shoes</option>
+                <option>Sort Pant</option>
+                <option>Sort Others</option>
             </select>
         </div>
         <div class="row">
@@ -66,9 +66,6 @@
         </div>
         
         {% if data.has_other_pages %}
-         
-        
-        
 
         <div class="page-btn">
             {% for i in data.paginator.page_range %}
@@ -131,20 +128,6 @@
         </div>
     </div>
 
-    <!-- javascript -->
-
-    <script>
-        var MenuItems = document.getElementById("MenuItems");
-        MenuItems.style.maxHeight = "0px";
-        function menutoggle() {
-            if (MenuItems.style.maxHeight == "0px") {
-                MenuItems.style.maxHeight = "200px"
-            }
-            else {
-                MenuItems.style.maxHeight = "0px"
-            }
-        }
-    </script>
 
 </body>
 
