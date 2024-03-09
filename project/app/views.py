@@ -228,7 +228,7 @@ def payment(request):
         order_id = response_payment['id']
         
         if order_status=='created':
-            product = Payment(Name=name , Amount =amount , Payment_id = response_payment['id'] )
+            product = Payment(Name=name , Amount =amount/100 , Payment_id = response_payment['id'] )
             product.save()
             response_payment['name'] = name
         
@@ -274,4 +274,5 @@ def success(request):
 def myorder(request):
     name = request.session['name']
     data = Payment.objects.filter(Name=name)
+    
     return render(request,'myorder.html',{'data':data})
