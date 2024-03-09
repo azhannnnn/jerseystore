@@ -92,6 +92,7 @@ def login(request):
                 request.session['id']=id
                 request.session['name']=username
                 request.session['email']=email
+                request.session.get('card',[])
                 user={
                     'name':username,
                     'email':email,
@@ -168,13 +169,15 @@ def cart(request):
     
 def add_cart(request,pk):
     try:
-        name = request.session['name']
-        card = request.session.get('card',[])
-        card.append(pk)
-        request.session['card'] = card
-        print(card)
-        data = Products.objects.get(id=pk)
-        return render(request,'productDetail.html', {"data": data})
+        if request.session.get('name'):     
+             card = request.session.get('card',[])
+             card.append(pk)
+             request.session['card'] = card
+             print(card)
+             data = Products.objects.get(id=pk)
+             return render(request,'productDetail.html', {"data": data})
+        else:
+             return render(request,'productDetail.html')
     except:
         return redirect('loginpage')
 
@@ -272,6 +275,10 @@ def success(request):
 
 def myorder(request):
     name = request.session['name']
-    data = Payment.objects.filter(Name=name)
-    
-    return render(request,'myorder.html',{'data':data})
+    order = Payment.objects.filter(Name=name)
+    print(order)
+    if order:
+       data = Payment.objects.filter(Name=name)
+       return render(request,'myorder.html',{'data':data})
+    else:
+        return render(request,'myorder.html',{'msg':"You have no any order yet!!"})

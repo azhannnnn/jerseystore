@@ -15,29 +15,41 @@
 
 <body>
     <!-- Account Page if user not logged in -->
-    {% if msg %}
-    <div class="container">
-        <div class="navbar">
-            <div class="logo">
-                <img src="{% static 'images/logo.png' %}" alt="logo" width="135px">
-            </div>
+   {% if msg %}
+   <div class="container">
+    <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="logo" width="135px">
         </div>
-    </div>    
-    <div class="account-page">
-        <div class="container">
-            <div class="row">
-                <div class="col-2">
-                    <img src="{% static 'images/image1.png' %}" width="100%">
-                </div>
-                <div class="col-2">
-                     <div class="form-container">
-                        <h1>{{msg}}</h1>
-                        <a class="btn" href="{% url 'loginpage' %}">Login</a>
-                    </div> 
-                </div>
+        <nav>
+            <ul id="MenuItems">
+                <li><a href="{% url 'user' %}">Home</a></li>
+                <li><a href="{% url 'products' %}">Products</a></li>
+                <li><a href="{% url 'myorder' %}">Your Orders</a></li>
+                <li><a href="{% url 'account' %}">Account</a></li>
+            </ul>
+        </nav>
+        <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
+        <span class="badge badge-info">{{request.session.card|length}}</span>
+        <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+    </div>
+</div>    
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="{% static 'images/image1.png' %}" width="100%">
+            </div>
+            
+            <div class="col-2">
+                 <div class="form-container">
+                    <h1>{{msg}}</h1>
+                    <a class="btn" href="{% url 'products' %}">Shop Now</a>
+                </div> 
             </div>
         </div>
     </div>
+</div>
 
     <!-- Account Page if user logged in -->
     {% else %}
@@ -63,11 +75,8 @@
     <div class="account-page">
         <div class="container">
             <div class="row">
-                <div class="col-2">
-                    <img src="{% static 'images/image1.png' %}" width="100%">
-                </div>
-                <div class="col-2">
-                     <div class="container">
+                
+                 <div class="container">
                         <table>
                             <tr>
                                 <th>id</th>
@@ -91,8 +100,8 @@
                        {% endfor %}
                         </table>
                     </div> 
+                
                 </div>
-            </div>
         </div>
     </div>
     {% endif %}
@@ -140,7 +149,18 @@
 
     
 
-    
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px"
+            }
+            else {
+                MenuItems.style.maxHeight = "0px"
+            }
+        }
+    </script>
     
 
 </body>
