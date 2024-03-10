@@ -82,7 +82,6 @@
                                 <th>id</th>
                                 <th>Name</th>
                                 <th>Amount</th>
-                                <th>Payment id</th>
                                 <th>Status</th>
                             </tr>
                             {% for i in data %}
@@ -90,7 +89,6 @@
                                 <td>{{forloop.counter}}</td>
                                 <td>{{i.Name}}</td>
                                 <td>{{i.Amount}}</td>
-                                <td>{{i.Payment_id}}</td>
                                 {% if i.Paid %}
                                 <td>&#9989; Paid</td>
                                 {% else %}
