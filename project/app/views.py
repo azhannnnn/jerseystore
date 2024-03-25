@@ -222,7 +222,7 @@ def payment(request):
         print(name)
         amount = float(request.POST.get('amount')) * 100
         print(amount)
-        client = razorpay.Client(auth=("rzp_test_ank5gb82ed6Jfx","jPpRlGXIaMvgyrlcb1gXuEoV"))
+        client = razorpay.Client(auth=("rzp_test_AcIEh6rX45zRp8","alxj2MIEOtVrhPpGGbMyFvmX"))
         response_payment = client.order.create({'amount':amount, 'currency':'INR','payment_capture':'1' })
     
         print(response_payment)
@@ -251,7 +251,7 @@ def success(request):
         }
 
         # client instance
-        client = razorpay.Client(auth=("rzp_test_ank5gb82ed6Jfx","jPpRlGXIaMvgyrlcb1gXuEoV"))
+        client = razorpay.Client(auth=("rzp_test_AcIEh6rX45zRp8","alxj2MIEOtVrhPpGGbMyFvmX"))
 
         try:
             status = client.utility.verify_payment_signature(params_dict)
@@ -263,7 +263,8 @@ def success(request):
             card = request.session['card']
             card.clear()
             request.session['card'] = card
-            return render(request, 'success.html', {'status': True})
+            
+            return render(request, 'success.html', {'status': True,'msg':"Your Cart is empty, Add Some!"})
         except:
             print("Not save all data in model")
             return render(request, 'success.html', {'status': False})
